@@ -26,7 +26,7 @@
 #define BLE_TCODE_SERVICE_UUID "ff1b451d-3070-4276-9c81-5dc5ea1043bc"
 #define BLE_TCODE_CHARACTERISTIC_UUID "c5f1543e-338d-47a0-8525-01e3c621359d"
 
-#define OSR2_MODE true // (true/false) Switch servo outputs to OSR2 mode
+#define OSR2_MODE false // (true/false) Switch servo outputs to OSR2 mode
 
 // Servo microseconds per radian
 // (Standard: 637 μs/rad)
@@ -693,37 +693,35 @@ void setup() {
 
   // Setup Servo PWM channels
   // Lower Left Servo
-  ledcSetup(LowerLeftServo_PWM,MainServo_Freq,16);
-  ledcAttachPin(LowerLeftServo_PIN,LowerLeftServo_PWM);
+  ledcAttachChannel(LowerLeftServo_PIN, MainServo_Freq, 16, LowerLeftServo_PWM);
+  
   // Upper Left Servo
-  ledcSetup(UpperLeftServo_PWM,MainServo_Freq,16);
-  ledcAttachPin(UpperLeftServo_PIN,UpperLeftServo_PWM);
+  ledcAttachChannel(UpperLeftServo_PIN, MainServo_Freq, 16, UpperLeftServo_PWM);
+  
   // Lower Right Servo
-  ledcSetup(LowerRightServo_PWM,MainServo_Freq,16);
-  ledcAttachPin(LowerRightServo_PIN,LowerRightServo_PWM);
+  ledcAttachChannel(LowerRightServo_PIN, MainServo_Freq, 16, LowerRightServo_PWM);
+  
   // Upper Right Servo
-  ledcSetup(UpperRightServo_PWM,MainServo_Freq,16);
-  ledcAttachPin(UpperRightServo_PIN,UpperRightServo_PWM);
+  ledcAttachChannel(UpperRightServo_PIN, MainServo_Freq, 16, UpperRightServo_PWM);
+  
   // Left Pitch Servo
-  ledcSetup(LeftPitchServo_PWM,PitchServo_Freq,16);
-  ledcAttachPin(LeftPitchServo_PIN,LeftPitchServo_PWM);
+  ledcAttachChannel(LeftPitchServo_PIN, PitchServo_Freq, 16, LeftPitchServo_PWM);
+  
   // Right Pitch Servo
-  ledcSetup(RightPitchServo_PWM,PitchServo_Freq,16);
-  ledcAttachPin(RightPitchServo_PIN,RightPitchServo_PWM);
+  ledcAttachChannel(RightPitchServo_PIN, PitchServo_Freq, 16, RightPitchServo_PWM);
+  
   // Twist Servo
-  ledcSetup(TwistServo_PWM,TwistServo_Freq,16);
-  ledcAttachPin(TwistServo_PIN,TwistServo_PWM);
+  ledcAttachChannel(TwistServo_PIN, TwistServo_Freq, 16, TwistServo_PWM);
+  
   // Valve Servo
-  ledcSetup(ValveServo_PWM,ValveServo_Freq,16);
-  ledcAttachPin(ValveServo_PIN,ValveServo_PWM);
-
-  // Set vibration PWM pins
-  // Vibe0 Pin
-  ledcSetup(Vibe0_PWM,VibePWM_Freq,8);
-  ledcAttachPin(Vibe0_PIN,Vibe0_PWM);
-  // Vibe1 Pin
-  ledcSetup(Vibe1_PWM,VibePWM_Freq,8);
-  ledcAttachPin(Vibe1_PIN,Vibe1_PWM); 
+  ledcAttachChannel(ValveServo_PIN, ValveServo_Freq, 16, ValveServo_PWM);
+  
+  // Vibe0
+  ledcAttachChannel(Vibe0_PIN, VibePWM_Freq, 8, Vibe0_PWM);
+  
+  // Vibe1
+  ledcAttachChannel(Vibe1_PIN, VibePWM_Freq, 8, Vibe1_PWM);
+  
 
   // Initiate position tracking for twist
   if (TWIST_PARALLAX) {
